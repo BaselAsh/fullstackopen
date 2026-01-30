@@ -4,16 +4,30 @@ const Statistics = ({ good, neutral, bad }) => {
   if (good || neutral || bad) {
     return (
       <>
-        <p>good {good}</p>
-        <p>neutral {neutral}</p>
-        <p>bad {bad}</p>
-        <p>average {(good - bad) / (good + bad + neutral)}</p>
-        <p>positive {100 * (good / (good + bad + neutral))} %</p>
+        <StatisticLine text="good" value={good} />
+        <StatisticLine text="neutral" value={neutral} />
+        <StatisticLine text="bad" value={bad} />
+        <StatisticLine
+          text="average"
+          value={(good - bad) / (good + bad + neutral)}
+        />
+        <StatisticLine
+          text="positive"
+          value={100 * (good / (good + bad + neutral)) + ' %'}
+        />
       </>
     );
   } else {
     return <p>No feedback given</p>;
   }
+};
+
+const StatisticLine = ({ text, value }) => {
+  return (
+    <p>
+      {text} {value}
+    </p>
+  );
 };
 
 const App = () => {
